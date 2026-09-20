@@ -1,0 +1,290 @@
+---
+import type { Lang, NavT } from "@/i18n/translations";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+
+interface Props {
+  lang: Lang;
+  t: NavT;
+}
+
+const { lang, t }: Props = Astro.props;
+
+interface NavItem {
+  label: string;
+  mobileLabel: string;
+  href: string;
+  icon: string;
+}
+
+const navItems: NavItem[] = [
+  {
+    label: t.home,
+    mobileLabel: t.home,
+    href: "#home",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z"></path></svg>`,
+  },
+  {
+    label: t.education,
+    mobileLabel: lang === "fr" ? "Form." : "Edu",
+    href: "#education",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"></path></svg>`,
+  },
+  {
+    label: t.experience,
+    mobileLabel: lang === "fr" ? "Exp." : "Exp.",
+    href: "#experience",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M9 3C7.89543 3 7 3.89543 7 5V6H4C2.89543 6 2 6.89543 2 8V11H22V8C22 6.89543 21.1046 6 20 6H17V5C17 3.89543 16.1046 3 15 3H9ZM15 5V6H9V5H15ZM2 13V18C2 19.1046 2.89543 20 4 20H20C21.1046 20 22 19.1046 22 18V13H14V15H10V13H2Z"></path></svg>`,
+  },
+  {
+    label: t.certifications,
+    mobileLabel: lang === "fr" ? "Certif." : "Certs",
+    href: "#certifications",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>`,
+  },
+  {
+    label: t.projects,
+    mobileLabel: t.projects,
+    href: "#projects",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M4 5V19H20V7H11.5858L9.58579 5H4ZM12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5Z"></path></svg>`,
+  },
+  {
+    label: t.contact,
+    mobileLabel: t.contact,
+    href: "#contact",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M21.7267 2.95694L16.2734 22.0432C16.1225 22.5716 15.7979 22.5956 15.5563 22.1126L11 13L1.9229 9.36919C1.41322 9.16532 1.41953 8.86022 1.95695 8.68108L21.0432 2.31901C21.5716 2.14285 21.8747 2.43866 21.7267 2.95694ZM19.0353 5.09647L6.81221 9.17085L12.4488 11.4255L15.4895 17.5068L19.0353 5.09647Z"></path></svg>`,
+  },
+];
+---
+
+<LanguageSwitcher lang={lang} />
+
+<div class="flex justify-center w-full">
+  <nav
+    id="main-nav"
+    class="fixed left-1/2 -translate-x-1/2 z-[100] bg-[var(--background)] border border-1 border-transparent backdrop-blur-xl transition-all duration-500 ease-in-out md:top-6 md:bottom-auto bottom-0 w-full max-w-full md:w-[80%]"
+  >
+    <div class="mx-auto flex justify-center items-center px-1 py-2 md:p-3 w-full max-w-full">
+      <ul
+        class="grid grid-cols-6 w-full min-w-0 md:flex md:w-auto md:justify-center gap-0.5 md:gap-6 lg:gap-10"
+      >
+        {
+          navItems.map((item) => (
+            <li class="min-w-0 md:flex-none md:flex-shrink-0">
+              <a
+                href={item.href}
+                class="flex flex-col items-center justify-center gap-0.5 min-w-0 w-full md:flex-row md:justify-center text-[var(--white-icon)] transition-colors group md:px-1"
+                aria-label={item.label}
+              >
+                <span class="md:hidden flex items-center justify-center w-5 h-5 shrink-0 [&_svg]:w-5 [&_svg]:h-5">
+                  <fragment set:html={item.icon} />
+                </span>
+                <span class="hidden md:inline-flex md:items-center md:gap-2 whitespace-nowrap text-base">
+                  <span class="w-1.5 h-1.5 rounded-full transition-all duration-300 scale-0 opacity-0 bg-[#A9FF5B] nav-indicator shrink-0" />
+                  {item.label}
+                </span>
+                <span
+                  class="md:hidden w-full min-w-0 px-0.5 text-[10px] leading-tight text-center sm:text-[11px]"
+                >
+                  {item.mobileLabel}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</div>
+<style>
+  nav {
+    transform: translateX(-50%);
+    background-color: var(--background);
+    transition:
+      background-color 0.3s ease,
+      border-radius 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  nav.scrolling {
+    background-color: var(--component-bg);
+    border-color: #ffffff10;
+    border-radius: 9999px;
+  }
+
+  nav a.active .nav-indicator {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  nav a.active {
+    color: white !important;
+  }
+
+  @media (max-width: 767px) {
+    nav {
+      width: 100% !important;
+      max-width: 100vw;
+      transform: translateX(-50%);
+      bottom: 0;
+      left: 50%;
+      position: fixed;
+      border-radius: 1rem 1rem 0 0;
+      border-color: #ffffff10;
+      box-sizing: border-box;
+    }
+
+    nav.scrolling {
+      border-radius: 1rem 1rem 0 0;
+      background-color: var(--component-bg);
+    }
+
+    body {
+      padding-bottom: 4.5rem;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById("main-nav");
+  const maxScroll = 1000;
+  // Reserve horizontal space on each side so the nav pill never renders
+  // underneath the fixed language switcher (top-right corner on desktop).
+  const SWITCHER_SAFE_ZONE = 150;
+  let rafId: number | null = null;
+  let minWidth = 640;
+
+  function computeMinWidth() {
+    if (!nav || window.innerWidth < 768) return;
+    const previousInlineWidth = nav.style.width;
+    nav.style.width = "max-content";
+    const natural = nav.getBoundingClientRect().width;
+    nav.style.width = previousInlineWidth;
+    // Never let the collapsed pill get narrower than its content needs.
+    minWidth = Math.max(Math.ceil(natural) + 24, 640);
+  }
+
+  function getMaxWidth() {
+    const eightyPercent = window.innerWidth * 0.8;
+    const switcherSafe = window.innerWidth - SWITCHER_SAFE_ZONE * 2;
+    // Prefer leaving room for the language switcher, but never shrink the
+    // pill below what its own content needs (that would cause overflow).
+    return Math.max(Math.min(eightyPercent, switcherSafe), minWidth);
+  }
+
+  function updateNav() {
+    const maxWidth = getMaxWidth();
+
+    if (window.scrollY > 0) {
+      nav?.classList.add("scrolling");
+
+      const scrollProgress = Math.min(window.scrollY / maxScroll, 1);
+      const easeProgress = 1 - Math.pow(1 - scrollProgress, 4);
+
+      const currentWidth = maxWidth - (maxWidth - minWidth) * easeProgress;
+
+      if (window.innerWidth >= 768) {
+        nav?.style.setProperty("width", `${currentWidth}px`);
+      }
+    } else {
+      nav?.classList.remove("scrolling");
+      if (window.innerWidth >= 768) {
+        nav?.style.setProperty("width", `${maxWidth}px`);
+      } else {
+        nav?.style.removeProperty("width");
+      }
+    }
+    rafId = null;
+  }
+
+  computeMinWidth();
+  updateNav();
+  window.addEventListener("resize", () => {
+    computeMinWidth();
+    updateNav();
+  });
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateNav);
+      }
+    },
+    { passive: true }
+  );
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = e.currentTarget as HTMLAnchorElement;
+      const targetId = target.getAttribute("href")?.substring(1) || "";
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll("nav a[href^='#']");
+    // Fine-grained thresholds (5% steps) so the callback keeps firing as
+    // scroll progresses, even for sections taller than the viewport (e.g.
+    // the hero), whose visible ratio can never reach a single high
+    // threshold like 0.6. This keeps every section's stored ratio fresh.
+    const observerOptions = {
+      threshold: Array.from({ length: 21 }, (_, i) => i / 20),
+    };
+
+    // Track the intersection ratio of every section, not just the ones
+    // that changed in the current batch. This avoids the "last entry in
+    // the batch wins" bug where two sections crossing the threshold at
+    // the same time (e.g. a short Home section overlapping Education on
+    // initial load) could activate the wrong nav link.
+    const sectionRatios = new Map<string, number>();
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("id");
+        if (id) {
+          sectionRatios.set(id, entry.intersectionRatio);
+        }
+      });
+
+      let bestId: string | null = null;
+      let bestRatio = 0;
+      sectionRatios.forEach((ratio, id) => {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
+        }
+      });
+
+      if (bestId) {
+        navLinks.forEach((link) => link.classList.remove("active"));
+        const activeLink = document.querySelector(`nav a[href="#${bestId}"]`);
+        activeLink?.classList.add("active");
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+    sections.forEach((section) => observer.observe(section));
+  });
+</script>
+
+<style>
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  nav a.active {
+    color: white !important;
+  }
+</style>

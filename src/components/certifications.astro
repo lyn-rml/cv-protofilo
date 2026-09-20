@@ -1,0 +1,63 @@
+---
+import type { CertificationsT } from "@/i18n/translations";
+
+interface Props {
+  t: CertificationsT;
+}
+
+const { t }: Props = Astro.props;
+---
+
+<section
+  id="certifications"
+  class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
+>
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">{t.sectionLabel}</h2>
+    <h3 class="text-4xl md:text-5xl font-medium mb-8">{t.title}</h3>
+
+    <div class="space-y-6">
+      {
+        t.items.map((cert) => (
+          <div class="bg-[#1414149c] border border-[var(--white-icon-tr)] rounded-2xl p-5 md:p-6 hover:border-[var(--white-icon)] transition-colors duration-300">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-1">
+              <h4 class="text-xl md:text-2xl font-semibold">{cert.title}</h4>
+              <span class="text-sm text-[var(--white-icon)] whitespace-nowrap">
+                {cert.date}
+              </span>
+            </div>
+            <p class="text-[var(--sec)] mb-4 text-sm md:text-base">
+              {cert.issuer}
+            </p>
+            <p class="text-[var(--white-icon)] text-sm md:text-base leading-relaxed mb-4">
+              {cert.summary}
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {cert.skills.map((skill) => (
+                <span class="text-xs px-2.5 py-1 rounded-full border border-[var(--white-icon-tr)] text-[var(--white-icon)] bg-[#1414149c]">
+                  {skill}
+                </span>
+              ))}
+            </div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/lyn-rammal/details/certifications/"
+              class="inline-flex items-center gap-2 text-sm text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="size-4"
+              >
+                <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+              </svg>
+              {cert.verifyLabel}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

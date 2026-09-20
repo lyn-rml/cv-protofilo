@@ -1,0 +1,178 @@
+---
+import type { Lang } from "@/i18n/translations";
+
+interface Props {
+  title: string;
+  lang?: Lang;
+  description?: string;
+  canonicalPath?: string;
+}
+
+const {
+  title,
+  lang = "en",
+  description = "Lyn Rammal — Full-Stack, AI & Mobile engineer who turns ideas into real, working products. Building software that creates genuine impact.",
+  canonicalPath = "/",
+} = Astro.props;
+
+const siteUrl = Astro.site
+  ? new URL(import.meta.env.BASE_URL, Astro.site).href.replace(/\/$/, "")
+  : "https://lyn-rml.github.io/cv-protofilo";
+
+const ogImageUrl = `${siteUrl}/og.image.png`;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Lyn Rammal",
+  alternateName: "Lyn",
+  url: siteUrl,
+  image: ogImageUrl,
+  sameAs: [
+    "https://github.com/lyn-rml",
+    "https://www.linkedin.com/in/lyn-rammal",
+  ],
+  jobTitle: "Software Engineer",
+  email: "mailto:lyn.rammal@ensta.fr",
+  description:
+    "Full-Stack, AI & Mobile engineer building software that turns ideas into real, useful products with genuine impact.",
+  knowsAbout: [
+    "Full-Stack Development",
+    "Artificial Intelligence",
+    "Computer Vision",
+    "Mobile Development",
+    "React",
+    "TypeScript",
+    "Python",
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Lyn Rammal" />
+    <meta
+      name="keywords"
+      content="Lyn Rammal, Full-Stack Developer, AI Engineer, Mobile Developer, Software Engineer, React, TypeScript, Python, Computer Vision, Portfolio"
+    />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.png`} />
+    <link rel="canonical" href={siteUrl + canonicalPath} />
+    <link rel="alternate" hreflang="en" href={siteUrl + "/"} />
+    <link rel="alternate" hreflang="fr" href={siteUrl + "/fr/"} />
+
+    <link
+      rel="preload"
+      href={`${import.meta.env.BASE_URL}fonts/montserrat-latin-wght-normal.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:url" content={siteUrl + canonicalPath} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lyn Rammal | Portfolio" />
+    <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_US"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </head>
+  <body class="bg-[--background] sm:px-28 lg:px-20 px-9">
+    <slot />
+
+    <!--
+      Privacy-friendly analytics (no cookies, no fingerprinting).
+      Replace YOUR-GOATCOUNTER-CODE with the site code from
+      https://www.goatcounter.com/signup once created.
+    -->
+    <script
+      data-goatcounter="https://YOUR-GOATCOUNTER-CODE.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+      is:inline
+    ></script>
+  </body>
+</html>
+
+<style
+  is:global
+  define:vars={{
+    montserratWoff2: `url('${import.meta.env.BASE_URL}fonts/montserrat-latin-wght-normal.woff2')`,
+  }}
+>
+  @font-face {
+    font-family: "Montserrat Variable";
+    src: var(--montserratWoff2) format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --background: #101010;
+    --sec: #a476ff;
+    --white: #dfdfdf;
+    --white-icon: #f3f3f398;
+    --white-icon-tr: #f3f3f310;
+    --component-bg: #181818;
+  }
+
+  * {
+    font-family:
+      "Montserrat Variable",
+      -apple-system,
+      system-ui,
+      sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  *::selection {
+    background-color: var(--sec);
+    color: var(--background);
+  }
+
+  /* Scrollbar styles */
+
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--container);
+    border-radius: 30px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--background);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--pink);
+  }
+
+  /* Scrollbar styles for Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) var(--container);
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Home from "@/components/home.astro";
+import Education from "@/components/education.astro";
+import Experience from "@/components/experience.astro";
+import Certifications from "@/components/certifications.astro";
+import Projects from "@/components/projects.astro";
+import Contact from "@/components/contact.astro";
+import Footer from "@/components/footer.astro";
+import { translations } from "@/i18n/translations";
+
+const lang = "fr" as const;
+const t = translations[lang];
+---
+
+<Layout
+  title="Lyn Rammal | Ingénieure Full-Stack · IA · Mobile"
+  lang={lang}
+  description="Lyn Rammal — Ingénieure Full-Stack, IA & Mobile qui transforme des idées en produits réels et utiles. Je construis des logiciels à impact réel."
+  canonicalPath="/fr/"
+>
+  <Nav lang={lang} t={t.nav} />
+  <Home lang={lang} t={t.home} skillsT={t.skills} />
+  <Education t={t.education} />
+  <Experience t={t.experience} />
+  <Certifications t={t.certifications} />
+  <Projects t={t.projects} />
+  <Contact t={t.contact} />
+  <Footer t={t.footer} />
+</Layout>
