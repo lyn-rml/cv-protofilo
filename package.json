@@ -6,9 +6,9 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "build:pages": "BASE_PATH=/cv-protofilo/ npm run build",
+    "build:pages": "BASE_PATH=/cv-portfolio/ npm run build",
     "preview": "astro preview",
-    "preview:pages": "BASE_PATH=/cv-protofilo/ astro preview",
+    "preview:pages": "BASE_PATH=/cv-portfolio/ astro preview",
     "astro": "astro"
   },
   "dependencies": {

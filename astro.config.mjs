@@ -4,8 +4,8 @@ import tailwind from "@astrojs/tailwind";
 
 import react from "@astrojs/react";
 
-// GitHub Pages project site: https://lyn-rml.github.io/cv-protofilo/
-// Local dev uses base "/" ; CI sets BASE_PATH=/cv-protofilo/
+// GitHub Pages project site: https://lyn-rml.github.io/cv-portfolio/
+// Local dev uses base "/" ; CI sets BASE_PATH=/cv-portfolio/
 const githubPagesBase = process.env.BASE_PATH ?? "/";
 
 // https://astro.build/config
